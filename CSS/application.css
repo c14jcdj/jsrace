@@ -1,0 +1,18 @@
+.container {
+  background-color: blue;
+  height: 500px;
+  width: 800px;
+  margin: auto ;
+  margin-top: 50px;
+}
+
+.racer_table td {
+  background-color: white;
+  border: 1px solid black;
+  height: 20px;
+  width: 20px;
+}
+
+.racer_table td.active {
+  background-color: black;
+}
