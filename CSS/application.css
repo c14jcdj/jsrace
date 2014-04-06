@@ -6,6 +6,8 @@
   margin-top: 50px;
 }
 
+
+
 .racer_table td {
   background-color: white;
   border: 1px solid black;
@@ -18,3 +20,4 @@
   background-color: black;
   visibility: hidden;
 }
+
