@@ -12,7 +12,7 @@
 #
 src_files:
     - javascripts/vendor/**/*.js
-    - javascripts/src/**/*.js
+    - javascripts/**/*.js
 
 # stylesheets
 #

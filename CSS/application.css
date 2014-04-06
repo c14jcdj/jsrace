@@ -11,8 +11,10 @@
   border: 1px solid black;
   height: 20px;
   width: 20px;
+  visibility: hidden;
 }
 
 .racer_table td.active {
   background-color: black;
+  visibility: hidden;
 }
