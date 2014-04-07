@@ -7,8 +7,11 @@ $(document).ready(function() {
 
 
 
-function Player(name) {
-    this.name = name;
+function Player() {
+    this.name = "Ralph";
+    this.x = 400;
+    this.y = 10;
+    this.speed = 200;
 }
 
 function Board() {
@@ -24,52 +27,89 @@ function GameView() {
 }
 
 GameController.prototype.run = function(view) {
-    var player1 = new Player("player1");
-    var board = new Board;
-    board.createCanvas();
-    view.bindStartButton(board);
+    board = new Board;
+    time = Date.now();
+    keysDown = {};
+    hero = new Player;
+    view.createCanvas();
+    view.bindStartButton(view, board);
+
 }
 
-GameView.prototype.bindStartButton = function(board) {
+GameView.prototype.bindStartButton = function(view, board) {
     $('#start').on('click', function() {
-        board.showPlayer();
-        board.hideStartButton();
+        view.showPlayer();
+        view.hideStartButton();
+        board.keyboardListener();
+        setInterval(board.runUpdate, 10);
     })
 }
 
-
-
-
-Board.prototype.showPlayer = function() {
-
-
-    this.placeHero();
-
-    // $('.container').append('<img id="theImg" src="Images/ralph.png" />')
-
+GameView.prototype.showPlayer = function() {
+    canvas = document.getElementById("canvas");
+    if (canvas.getContext) {
+        ctx = canvas.getContext("2d");
+        img = new Image();
+        img.addEventListener("load", function() {
+            ctx.drawImage(img, hero.x, hero.y);
+        }, false);
+        img.src = 'Images/ralph.png';
+    }
 }
 
-Board.prototype.hideStartButton = function() {
+GameView.prototype.hideStartButton = function() {
     $('#start').css('visibility', "hidden")
 }
 
-Board.prototype.createCanvas = function() {
-    var canvas = document.createElement("canvas");
+GameView.prototype.createCanvas = function() {
+    canvas = document.createElement("canvas");
     canvas.id = 'canvas';
-    var ctx = canvas.getContext("2d");
+    ctx = canvas.getContext("2d");
     canvas.width = 800;
     canvas.height = 750;
     $('.container').append(canvas);
 }
 
-Board.prototype.placeHero = function() {
-    var canvas = document.getElementById("canvas");
-    if (canvas.getContext) {
-        var ctx = canvas.getContext("2d");
-        var img = new Image(); // Create new img element
-        img.addEventListener("load", function() {
-            ctx.drawImage(img, 10, 10)
-        }, false);
-        img.src = 'Images/ralph.png';
+
+
+Board.prototype.update = function(mod) {
+
+    if (37 in keysDown) {
+        hero.x -= hero.speed * mod;
     }
+    if (38 in keysDown) { //up
+        hero.y -= hero.speed * mod;
+    }
+    if (39 in keysDown) {
+        hero.x += hero.speed * mod;
+    }
+    if (40 in keysDown) {
+        hero.y += hero.speed * mod;
+    }
+}
+
+Board.prototype.render = function() {
+
+    ctx = canvas.getContext("2d");
+    img = new Image();
+    img.addEventListener("load", function() {
+        ctx.drawImage(img, hero.x, hero.y);
+    }, false);
+    img.src = 'Images/ralph.png';
+}
+
+
+Board.prototype.runUpdate = function() {
+    board.update(((Date.now() - time) / 1000));
+    board.render();
+    time = Date.now();
+}
+
+Board.prototype.keyboardListener = function() {
+    window.addEventListener('keydown', function(e) {
+        keysDown[e.keyCode] = true;
+    });
+    window.addEventListener('keyup', function(e) {
+        delete keysDown[e.keyCode];
+    });
 }
