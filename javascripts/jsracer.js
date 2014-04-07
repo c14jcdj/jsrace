@@ -38,7 +38,7 @@ GameController.prototype.run = function(view) {
 
 GameView.prototype.bindStartButton = function(view, board) {
     $('#start').on('click', function() {
-        view.showPlayer();
+        // view.showPlayer();
         view.hideStartButton();
         board.keyboardListener();
         setInterval(board.runUpdate, 10);
@@ -89,10 +89,11 @@ Board.prototype.update = function(mod) {
 }
 
 Board.prototype.render = function() {
-
     ctx = canvas.getContext("2d");
     img = new Image();
     img.addEventListener("load", function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+
         ctx.drawImage(img, hero.x, hero.y);
     }, false);
     img.src = 'Images/ralph.png';
