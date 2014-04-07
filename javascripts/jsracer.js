@@ -34,7 +34,7 @@ GameView.prototype = {
         $('#start').on('click', function() {
             view.hideStartButton();
             board.keyboardListener();
-            setInterval(board.runUpdate, 10);
+            interval = setInterval(board.runUpdate, 10);
 
         })
     },
@@ -107,6 +107,7 @@ Board.prototype = {
     reset: function() {
         hero.x = -44;
         hero.y = -10;
+        clearInterval(interval);
         DisableArrowKeys();
 
     }
@@ -121,5 +122,15 @@ function DisableArrowKeys() {
             return false;
         }
         return true;
+    });
+}
+
+function EnableArrowKeys() {
+    var ar = new Array(37, 38, 39, 40);
+    $(document).keydown(function(e) {
+        var key = e.which;
+        if ($.inArray(key, ar) > -1) {
+            return true;
+        }
     });
 }
