@@ -1,23 +1,12 @@
 .container {
-  background-color: blue;
-  height: 500px;
+  border: 1px solid black;
+  height: 750px;
   width: 800px;
   margin: auto ;
   margin-top: 50px;
 }
 
+#canvas {
+  background-image: url('../Images/background.png');
 
-
-.racer_table td {
-  background-color: white;
-  border: 1px solid black;
-  height: 20px;
-  width: 20px;
-  visibility: hidden;
 }
-
-.racer_table td.active {
-  background-color: black;
-  visibility: hidden;
-}
-
