@@ -5,9 +5,10 @@ $(document).ready(function() {
 
 })
 
-function ComputerPlayer() {
-    this.x = 40;
-    this.y = 40;
+function ComputerPlayer(x, y, speed) {
+    this.x = x;
+    this.y = y;
+    this.speed = speed;
 }
 
 function Player() {
@@ -29,7 +30,7 @@ GameController.prototype = {
         time = Date.now();
         keysDown = {};
         hero = new Player();
-        felix = new ComputerPlayer();
+        felix = new ComputerPlayer(20, 50, 120);
         view.createCanvas();
         view.bindStartButton(view, board);
     }
@@ -77,6 +78,14 @@ Board.prototype = {
         }
     },
 
+    updateFelix: function(mod) {
+        if (felix.x >= 750) {
+            felix.x = 0
+        } else {
+            felix.x += felix.speed * mod;
+        }
+    },
+
     render: function() {
         ctx = canvas.getContext("2d");
         heroImg = new Image();
@@ -92,6 +101,7 @@ Board.prototype = {
 
     runUpdate: function() {
         board.update(((Date.now() - time) / 1000));
+        board.updateFelix(((Date.now() - time) / 1000));
         board.render();
         board.winner();
         time = Date.now();
