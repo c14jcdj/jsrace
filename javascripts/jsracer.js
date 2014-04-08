@@ -35,6 +35,7 @@ GameController.prototype = {
         felix3 = new ComputerPlayer(320, 520, 3);
         badGuys = [felix1, felix2, felix3];
         view.createCanvas();
+        view.bindWidget();
         view.bindStartButton(view, board);
     }
 }
@@ -42,11 +43,26 @@ GameController.prototype = {
 GameView.prototype = {
     bindStartButton: function(view, board) {
         $('#start').on('click', function() {
+
             view.hideStartButton();
             board.keyboardListener();
             interval = setInterval(board.runUpdate, 10);
 
         })
+    },
+
+    bindWidget: function() {
+        $(function() {
+            $("#dialog").dialog({
+                autoOpen: false
+            });
+            $("#start").on("click", function() {
+                $("#dialog").dialog({
+                    modal: true
+                });
+                $("#dialog").dialog("open");
+            });
+        });
     },
 
     hideStartButton: function() {
