@@ -66,7 +66,7 @@ GameView.prototype = {
 }
 
 Board.prototype = {
-    update: function() {
+    updateHero: function() {
         if (37 in keysDown) {
             hero.x -= hero.speed;
         }
@@ -109,11 +109,27 @@ Board.prototype = {
     },
 
     runUpdate: function() {
-        board.update();
-        board.updateFelix();
+        board.updateHero();
+        // board.updateFelix();
+        board.checkForHit();
         board.render();
         board.winner();
         time = Date.now();
+    },
+
+    checkForHit: function() {
+        var i;
+        for (i = 0; i < badGuys.length; i++) {
+            var aodX = [badGuys[i].x - 14, badGuys[i].x + 14];
+            var aodY = [badGuys[i].y - 82, badGuys[i].y + 82];
+            // console.log("hero x:" + hero.x)
+            // console.log("hero y:" + hero.y)
+            // console.log("aodX:" + aodX)
+            // console.log("aodY:" + aodY)
+            if (((aodX[0] <= hero.x) && (hero.x <= aodX[1])) && ((aodY[0] <= hero.y) && (hero.y <= aodY[1]))) {
+                this.reset();
+            }
+        }
     },
 
     keyboardListener: function() {
@@ -125,7 +141,6 @@ Board.prototype = {
         });
     },
     winner: function() {
-        console.log(hero.x)
         if (hero.x >= 730) {
             $('.container').prepend("You Win")
             this.reset();
