@@ -5,6 +5,11 @@ $(document).ready(function() {
 
 })
 
+function ComputerPlayer() {
+    this.x = 40;
+    this.y = 40;
+}
+
 function Player() {
     this.name = "Ralph";
     this.x = 0;
@@ -20,10 +25,11 @@ function GameView() {}
 
 GameController.prototype = {
     run: function(view) {
-        board = new Board;
+        board = new Board();
         time = Date.now();
         keysDown = {};
-        hero = new Player;
+        hero = new Player();
+        felix = new ComputerPlayer();
         view.createCanvas();
         view.bindStartButton(view, board);
     }
@@ -73,12 +79,15 @@ Board.prototype = {
 
     render: function() {
         ctx = canvas.getContext("2d");
-        img = new Image();
-        img.addEventListener("load", function() {
+        heroImg = new Image();
+        felixImg = new Image();
+        heroImg.addEventListener("load", function() {
             ctx.clearRect(0, 0, canvas.width, canvas.height)
-            ctx.drawImage(img, hero.x, hero.y);
+            ctx.drawImage(heroImg, hero.x, hero.y);
+            ctx.drawImage(felixImg, felix.x, felix.y);
         }, false);
-        img.src = 'Images/ralph.png';
+        heroImg.src = 'Images/ralph.png';
+        felixImg.src = 'Images/felix.png';
     },
 
     runUpdate: function() {
