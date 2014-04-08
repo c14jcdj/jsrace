@@ -14,7 +14,7 @@ function ComputerPlayer(x, y, speed) {
 function Player() {
     this.name = "Ralph";
     this.x = 0;
-    this.y = 300;
+    this.y = 650;
     this.speed = 200;
 }
 
@@ -30,7 +30,10 @@ GameController.prototype = {
         time = Date.now();
         keysDown = {};
         hero = new Player();
-        felix = new ComputerPlayer(20, 50, 120);
+        felix1 = new ComputerPlayer(20, 50, 120);
+        felix2 = new ComputerPlayer(120, 270, 220);
+        felix3 = new ComputerPlayer(320, 470, 80);
+        badGuys = [felix1, felix2, felix3];
         view.createCanvas();
         view.bindStartButton(view, board);
     }
@@ -79,10 +82,13 @@ Board.prototype = {
     },
 
     updateFelix: function(mod) {
-        if (felix.x >= 750) {
-            felix.x = 0
-        } else {
-            felix.x += felix.speed * mod;
+        var i;
+        for (i = 0; i < badGuys.length; i++) {
+            if (badGuys[i].x >= 750) {
+                badGuys[i].x = 0
+            } else {
+                badGuys[i].x += badGuys[i].speed * mod;
+            }
         }
     },
 
@@ -90,10 +96,13 @@ Board.prototype = {
         ctx = canvas.getContext("2d");
         heroImg = new Image();
         felixImg = new Image();
+
         heroImg.addEventListener("load", function() {
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             ctx.drawImage(heroImg, hero.x, hero.y);
-            ctx.drawImage(felixImg, felix.x, felix.y);
+            ctx.drawImage(felixImg, badGuys[0].x, badGuys[0].y);
+            ctx.drawImage(felixImg, badGuys[1].x, badGuys[1].y);
+            ctx.drawImage(felixImg, badGuys[2].x, badGuys[2].y);
         }, false);
         heroImg.src = 'Images/ralph.png';
         felixImg.src = 'Images/felix.png';
