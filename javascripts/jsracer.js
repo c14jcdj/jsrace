@@ -146,7 +146,7 @@ Board.prototype = {
 
     reset: function() {
         hero.x = -44;
-        hero.y = -10;
+        hero.y = 1;
         clearInterval(interval);
         DisableArrowKeys();
 
