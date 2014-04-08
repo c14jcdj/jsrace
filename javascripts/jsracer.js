@@ -15,7 +15,7 @@ function Player() {
     this.name = "Ralph";
     this.x = 0;
     this.y = 650;
-    this.speed = 200;
+    this.speed = 2;
 }
 
 function Board() {}
@@ -30,9 +30,9 @@ GameController.prototype = {
         time = Date.now();
         keysDown = {};
         hero = new Player();
-        felix1 = new ComputerPlayer(20, 50, 120);
-        felix2 = new ComputerPlayer(120, 270, 220);
-        felix3 = new ComputerPlayer(320, 470, 80);
+        felix1 = new ComputerPlayer(20, 90, 2);
+        felix2 = new ComputerPlayer(120, 320, 6);
+        felix3 = new ComputerPlayer(320, 520, 5);
         badGuys = [felix1, felix2, felix3];
         view.createCanvas();
         view.bindStartButton(view, board);
@@ -66,28 +66,28 @@ GameView.prototype = {
 }
 
 Board.prototype = {
-    update: function(mod) {
+    update: function() {
         if (37 in keysDown) {
-            hero.x -= hero.speed * mod;
+            hero.x -= hero.speed;
         }
-        if (38 in keysDown) { //up
-            hero.y -= hero.speed * mod;
+        if (38 in keysDown) {
+            hero.y -= hero.speed;
         }
         if (39 in keysDown) {
-            hero.x += hero.speed * mod;
+            hero.x += hero.speed;
         }
         if (40 in keysDown) {
-            hero.y += hero.speed * mod;
+            hero.y += hero.speed;
         }
     },
 
-    updateFelix: function(mod) {
+    updateFelix: function() {
         var i;
         for (i = 0; i < badGuys.length; i++) {
             if (badGuys[i].x >= 750) {
                 badGuys[i].x = 0
             } else {
-                badGuys[i].x += badGuys[i].speed * mod;
+                badGuys[i].x += badGuys[i].speed;
             }
         }
     },
@@ -109,8 +109,8 @@ Board.prototype = {
     },
 
     runUpdate: function() {
-        board.update(((Date.now() - time) / 1000));
-        board.updateFelix(((Date.now() - time) / 1000));
+        board.update();
+        board.updateFelix();
         board.render();
         board.winner();
         time = Date.now();
