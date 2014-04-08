@@ -32,7 +32,7 @@ GameController.prototype = {
         hero = new Player();
         felix1 = new ComputerPlayer(20, 90, 2);
         felix2 = new ComputerPlayer(120, 320, 6);
-        felix3 = new ComputerPlayer(320, 520, 5);
+        felix3 = new ComputerPlayer(320, 520, 3);
         badGuys = [felix1, felix2, felix3];
         view.createCanvas();
         view.bindStartButton(view, board);
@@ -110,7 +110,7 @@ Board.prototype = {
 
     runUpdate: function() {
         board.updateHero();
-        // board.updateFelix();
+        board.updateFelix();
         board.checkForHit();
         board.render();
         board.winner();
@@ -122,11 +122,8 @@ Board.prototype = {
         for (i = 0; i < badGuys.length; i++) {
             var aodX = [badGuys[i].x - 14, badGuys[i].x + 14];
             var aodY = [badGuys[i].y - 82, badGuys[i].y + 82];
-            // console.log("hero x:" + hero.x)
-            // console.log("hero y:" + hero.y)
-            // console.log("aodX:" + aodX)
-            // console.log("aodY:" + aodY)
             if (((aodX[0] <= hero.x) && (hero.x <= aodX[1])) && ((aodY[0] <= hero.y) && (hero.y <= aodY[1]))) {
+                $('.container').prepend('You Lose')
                 this.reset();
             }
         }
@@ -141,7 +138,7 @@ Board.prototype = {
         });
     },
     winner: function() {
-        if (hero.x >= 730) {
+        if (hero.y <= 0) {
             $('.container').prepend("You Win")
             this.reset();
         }
