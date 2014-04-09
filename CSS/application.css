@@ -1,9 +1,43 @@
 .container {
+  visibility: hidden;
   border: 1px solid black;
   height: 700px;
   width: 747px;
   margin: auto ;
   margin-top: 50px;
+}
+
+#banner {
+  margin-top: 150px;
+  width: 100%;
+  height: 150px;
+  opacity: .3;
+  background-color: red;
+}
+
+header {
+  margin-top: 20px;
+  z-index: 1;
+  color:black;
+  font-family: 'Trade Winds', cursive;
+  position: absolute;
+  font-size: 80px;
+}
+
+header span {
+  margin-left: 400px;
+
+  text-shadow:
+    -2px -2px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
+
+}
+
+body {
+  background: url('../Images/startbg.png');
+  background-repeat:no-repeat;
 }
 
 #canvas {

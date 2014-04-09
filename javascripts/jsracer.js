@@ -45,6 +45,7 @@ GameController.prototype = {
 
 GameView.prototype = {
     startGame: function(view, board) {
+        $('.container').css("visibility", "visible")
         view.hideStartButton();
         board.keyboardListener();
         interval = setInterval(board.runUpdate, 10);
