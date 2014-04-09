@@ -38,8 +38,11 @@ GameController.prototype = {
         view.bindWidget();
         $('#start').on('click', function() {
             view.startGame(view, board);
+            $('#header').css('visibility', 'hidden');
+            $('#banner').css('visibility', 'hidden');
+            $('body').css('background-image', 'none');
+            $('body').css('background-image', 'url(Images/gamebg.png)');
         })
-        // view.startGame(view, board);
     }
 }
 

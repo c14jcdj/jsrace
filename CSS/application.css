@@ -1,10 +1,13 @@
 .container {
+  position: absolute;
+
   visibility: hidden;
   border: 1px solid black;
   height: 700px;
   width: 747px;
-  margin: auto ;
-  margin-top: 50px;
+  margin-top: -450px;
+  margin-left: 250px;
+
 }
 
 #banner {
@@ -51,7 +54,7 @@ body {
 
 #start-button button  {
   margin-top: 50px;
-  margin-left: 400px;
+  margin-left: 430px;
   background-color: none;
   height: 150px;
   width: 400px;
