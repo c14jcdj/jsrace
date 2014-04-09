@@ -149,9 +149,11 @@ Board.prototype = {
             var aodX = [badGuys[i].x - 14, badGuys[i].x + 14];
             var aodY = [badGuys[i].y - 82, badGuys[i].y + 82];
             if (((aodX[0] <= hero.x) && (hero.x <= aodX[1])) && ((aodY[0] <= hero.y) && (hero.y <= aodY[1]))) {
+
                 $("#dialog-lose").dialog({
                     modal: true,
-                    resizable: false,
+                    resizable: true,
+                    height: 330,
                     buttons: {
                         "Play Again?": function() {
                             $(this).dialog("close");
@@ -180,7 +182,19 @@ Board.prototype = {
     winner: function() {
         if (hero.y <= 0) {
             $("#dialog-win").dialog({
-                modal: true
+                modal: true,
+                resizable: true,
+                height: 330,
+                buttons: {
+                    "Play Again?": function() {
+                        $(this).dialog("close");
+                        view.startGame(view, board);
+                        hero = new Player(0, 650, 2);
+                    },
+                    "Quit": function() {
+                        $(this).dialog("close");
+                    }
+                }
             });
             $("#dialog-win").dialog("open");
             this.reset();

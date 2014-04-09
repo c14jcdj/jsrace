@@ -77,6 +77,21 @@ body {
 }
 
 #ui-id-1 {
-  color: #00A3CC;
+  color: red;
+}
+
+
+
+/*body > div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-draggable.ui-dialog-buttons
+{*/
+
+  #dialog-lose {
+  background-image: url('../Images/lose.png');
+}
+
+
+#dialog-win {
+  background-image: url('../Images/win.png');
+
 }
 
