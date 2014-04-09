@@ -53,14 +53,20 @@ GameView.prototype = {
 
     bindWidget: function() {
         $(function() {
-            $("#dialog").dialog({
+            $("#dialog-start").dialog({
+                autoOpen: false
+            });
+            $("#dialog-win").dialog({
+                autoOpen: false
+            });
+            $("#dialog-lose").dialog({
                 autoOpen: false
             });
             $("#start").on("click", function() {
-                $("#dialog").dialog({
+                $("#dialog-start").dialog({
                     modal: true
                 });
-                $("#dialog").dialog("open");
+                $("#dialog-start").dialog("open");
             });
         });
     },
@@ -139,7 +145,10 @@ Board.prototype = {
             var aodX = [badGuys[i].x - 14, badGuys[i].x + 14];
             var aodY = [badGuys[i].y - 82, badGuys[i].y + 82];
             if (((aodX[0] <= hero.x) && (hero.x <= aodX[1])) && ((aodY[0] <= hero.y) && (hero.y <= aodY[1]))) {
-                $('.container').prepend('You Lose')
+                $("#dialog-lose").dialog({
+                    modal: true
+                });
+                $("#dialog-lose").dialog("open");
                 this.reset();
             }
         }
@@ -155,7 +164,10 @@ Board.prototype = {
     },
     winner: function() {
         if (hero.y <= 0) {
-            $('.container').prepend("You Win")
+            $("#dialog-win").dialog({
+                modal: true
+            });
+            $("#dialog-win").dialog("open");
             this.reset();
         }
     },

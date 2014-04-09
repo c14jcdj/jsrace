@@ -11,8 +11,12 @@
 
 }
 
+#dialog {
+  height: 800px;
+  width: 800px;
+}
 
 #ui-id-1 {
-  color: steelblue;
+  color: #00A3CC;
 }
 
