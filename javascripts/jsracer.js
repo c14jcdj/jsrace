@@ -11,11 +11,11 @@ function ComputerPlayer(x, y, speed) {
     this.speed = speed;
 }
 
-function Player() {
+function Player(x, y, speed) {
     this.name = "Ralph";
-    this.x = 0;
-    this.y = 650;
-    this.speed = 2;
+    this.x = x;
+    this.y = y;
+    this.speed = speed;
 }
 
 function Board() {}
@@ -29,26 +29,25 @@ GameController.prototype = {
         board = new Board();
         time = Date.now();
         keysDown = {};
-        hero = new Player();
+        hero = new Player(0, 650, 2);
         felix1 = new ComputerPlayer(20, 90, 2);
         felix2 = new ComputerPlayer(120, 320, 6);
         felix3 = new ComputerPlayer(320, 520, 3);
         badGuys = [felix1, felix2, felix3];
         view.createCanvas();
         view.bindWidget();
-        view.bindStartButton(view, board);
+        $('#start').on('click', function() {
+            view.startGame(view, board);
+        })
+        // view.startGame(view, board);
     }
 }
 
 GameView.prototype = {
-    bindStartButton: function(view, board) {
-        $('#start').on('click', function() {
-
-            view.hideStartButton();
-            board.keyboardListener();
-            interval = setInterval(board.runUpdate, 10);
-
-        })
+    startGame: function(view, board) {
+        view.hideStartButton();
+        board.keyboardListener();
+        interval = setInterval(board.runUpdate, 10);
     },
 
     bindWidget: function() {
@@ -141,12 +140,24 @@ Board.prototype = {
 
     checkForHit: function() {
         var i;
+        var view = new GameView();
         for (i = 0; i < badGuys.length; i++) {
             var aodX = [badGuys[i].x - 14, badGuys[i].x + 14];
             var aodY = [badGuys[i].y - 82, badGuys[i].y + 82];
             if (((aodX[0] <= hero.x) && (hero.x <= aodX[1])) && ((aodY[0] <= hero.y) && (hero.y <= aodY[1]))) {
                 $("#dialog-lose").dialog({
-                    modal: true
+                    modal: true,
+                    resizable: false,
+                    buttons: {
+                        "Play Again?": function() {
+                            $(this).dialog("close");
+                            view.startGame(view, board);
+                            hero = new Player(0, 650, 2);
+                        },
+                        "Quit": function() {
+                            $(this).dialog("close");
+                        }
+                    }
                 });
                 $("#dialog-lose").dialog("open");
                 this.reset();
@@ -176,7 +187,7 @@ Board.prototype = {
         hero.x = -44;
         hero.y = 1;
         clearInterval(interval);
-        DisableArrowKeys();
+        // DisableArrowKeys();
 
     }
 }
