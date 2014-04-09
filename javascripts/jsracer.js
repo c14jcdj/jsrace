@@ -89,7 +89,6 @@ function GameController() {}
 GameController.prototype = {
     run: function(view) {
         board = new Board();
-        time = Date.now();
         keysDown = {};
         hero = new Ralph(0, 650, 2);
         felix1 = new Felix(20, 90, 2);
@@ -100,10 +99,10 @@ GameController.prototype = {
         view.bindWidget();
         $('#start').on('click', function() {
             view.startGame(view, board);
-            $('#header').css('visibility', 'hidden');
-            $('#banner').css('visibility', 'hidden');
-            $('body').css('background-image', 'none');
-            $('body').css('background-image', 'url(Images/gamebg.png)');
+            view.toggleHeader('hidden');
+            view.toggleBanner('hidden');
+            view.toggleBackground('none');
+            view.toggleBackground('url(Images/gamebg.png)')
         })
     },
 
@@ -113,7 +112,6 @@ GameController.prototype = {
         board.checkForHit();
         view.render();
         board.winner();
-        time = Date.now();
     },
 }
 
@@ -125,10 +123,14 @@ function GameView() {}
 
 GameView.prototype = {
     startGame: function(view, board) {
-        $('.container').css("visibility", "visible")
-        view.toggleStartButton("hidden");
+        this.toggleContainer("visible")
+        this.toggleStartButton("hidden");
         board.keyboardListener();
         interval = setInterval(game.runUpdate, 10);
+    },
+
+    toggleContainer: function(visibility) {
+        $('.container').css("visibility", visibility);
     },
 
     initLoseWindow: function() {
@@ -179,29 +181,40 @@ GameView.prototype = {
         $("#dialog-lose").dialog("open");
     },
 
+    toggleHeader: function(visibility) {
+        $('#header').css('visibility', visibility);
+    },
+
+    toggleBanner: function(visibility) {
+        $('#banner').css('visibility', visibility);
+    },
+
+    toggleBackground: function(visibility) {
+        $('body').css('background-image', visibility);
+    },
+
     resetHomePage: function() {
-        $('.container').css("visibility", "hidden");
-        $('#header').css('visibility', 'visible');
-        $('#banner').css('visibility', 'visible');
-        $('#start').css('visibility', 'visible');
-        $('body').css('background-image', 'none');
-        $('body').css('background-image', 'url(Images/startbg.png)');
+        this.toggleContainer("hidden");
+        this.toggleHeader("visible");
+        this.toggleBanner('visible');
+        this.toggleStartButton("visible");
+        this.toggleBackground('none');
+        this.toggleBackground('url(Images/startbg.png)');
     },
 
     render: function() {
         ctx = canvas.getContext("2d");
         heroImg = new Image();
         felixImg = new Image();
-
+        heroImg.src = 'Images/ralph.png';
+        felixImg.src = 'Images/felix.png';
         heroImg.addEventListener("load", function() {
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             ctx.drawImage(heroImg, hero.x, hero.y);
-            ctx.drawImage(felixImg, badGuys[0].x, badGuys[0].y);
-            ctx.drawImage(felixImg, badGuys[1].x, badGuys[1].y);
-            ctx.drawImage(felixImg, badGuys[2].x, badGuys[2].y);
+            for (var i = 0; i < badGuys.length; i++) {
+                ctx.drawImage(felixImg, badGuys[i].x, badGuys[i].y);
+            }
         }, false);
-        heroImg.src = 'Images/ralph.png';
-        felixImg.src = 'Images/felix.png';
     },
 
     bindWidget: function() {
