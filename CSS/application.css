@@ -21,11 +21,15 @@ header {
   color:black;
   font-family: 'Trade Winds', cursive;
   position: absolute;
+  padding: 4px;
   font-size: 80px;
+
 }
 
+
+
 header span {
-  margin-left: 400px;
+  margin-left: 330px;
 
   text-shadow:
     -2px -2px 0 white,
@@ -42,6 +46,25 @@ body {
 
 #canvas {
   background-image: url('../Images/background.png');
+
+}
+
+#start-button button  {
+  margin-top: 50px;
+  margin-left: 400px;
+  background-color: none;
+  height: 150px;
+  width: 400px;
+  border-radius: 5px;
+  font-family: 'Trade Winds', cursive;
+  font-size: 40px;
+  background-color: transparent;
+  color: black;
+  text-shadow:
+    -2px -2px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
 
 }
 
