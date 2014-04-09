@@ -5,14 +5,15 @@ $(document).ready(function() {
 
 })
 
-function ComputerPlayer(x, y, speed) {
+// MODELS
+
+function Felix(x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
 }
 
-function Player(x, y, speed) {
-    this.name = "Ralph";
+function Ralph(x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
@@ -29,10 +30,10 @@ GameController.prototype = {
         board = new Board();
         time = Date.now();
         keysDown = {};
-        hero = new Player(0, 650, 2);
-        felix1 = new ComputerPlayer(20, 90, 2);
-        felix2 = new ComputerPlayer(120, 320, 6);
-        felix3 = new ComputerPlayer(320, 520, 3);
+        hero = new Ralph(0, 650, 2);
+        felix1 = new Felix(20, 90, 2);
+        felix2 = new Felix(120, 320, 6);
+        felix3 = new Felix(320, 520, 3);
         badGuys = [felix1, felix2, felix3];
         view.createCanvas();
         view.bindWidget();
@@ -167,7 +168,7 @@ Board.prototype = {
                         "Play Again?": function() {
                             $(this).dialog("close");
                             view.startGame(view, board);
-                            hero = new Player(0, 650, 2);
+                            hero = new Ralph(0, 650, 2);
                         },
                         "Quit": function() {
                             view.resetHomePage();
@@ -200,7 +201,7 @@ Board.prototype = {
                     "Play Again?": function() {
                         $(this).dialog("close");
                         view.startGame(view, board);
-                        hero = new Player(0, 650, 2);
+                        hero = new Ralph(0, 650, 2);
                     },
                     "Quit": function() {
                         view.resetHomePage();
