@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    var game = new GameController;
-    var view = new GameView;
+    game = new GameController;
+    view = new GameView;
     game.run(view)
 
 })
@@ -52,6 +52,15 @@ GameView.prototype = {
         view.hideStartButton();
         board.keyboardListener();
         interval = setInterval(board.runUpdate, 10);
+    },
+
+    resetHomePage: function() {
+        $('.container').css("visibility", "hidden");
+        $('#header').css('visibility', 'visible');
+        $('#banner').css('visibility', 'visible');
+        $('#start').css('visibility', 'visible');
+        $('body').css('background-image', 'none');
+        $('body').css('background-image', 'url(Images/startbg.png)');
     },
 
     bindWidget: function() {
@@ -161,7 +170,9 @@ Board.prototype = {
                             hero = new Player(0, 650, 2);
                         },
                         "Quit": function() {
+                            view.resetHomePage();
                             $(this).dialog("close");
+                            game.run();
                         }
                     }
                 });
@@ -192,7 +203,9 @@ Board.prototype = {
                         hero = new Player(0, 650, 2);
                     },
                     "Quit": function() {
+                        view.resetHomePage();
                         $(this).dialog("close");
+                        game.run();
                     }
                 }
             });
