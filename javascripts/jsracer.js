@@ -78,8 +78,8 @@ GameView.prototype = {
         canvas = document.createElement("canvas");
         canvas.id = 'canvas';
         ctx = canvas.getContext("2d");
-        canvas.width = 800;
-        canvas.height = 750;
+        canvas.width = 747;
+        canvas.height = 700;
         $('.container').append(canvas);
     }
 
