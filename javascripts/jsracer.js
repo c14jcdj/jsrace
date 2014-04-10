@@ -47,14 +47,14 @@ Board.prototype = {
         }
     },
 
-    checkForHit: function(view, badGuys, hero) {
+    checkForHit: function(view, badGuys, hero, game) {
         var i;
-        // var view = new GameView();
+        that = this
         for (i = 0; i < badGuys.length; i++) {
             var aodX = [badGuys[i].x - 14, badGuys[i].x + 14];
             var aodY = [badGuys[i].y - 82, badGuys[i].y + 82];
             if (((aodX[0] <= hero.x) && (hero.x <= aodX[1])) && ((aodY[0] <= hero.y) && (hero.y <= aodY[1]))) {
-                view.initLoseWindow();
+                view.initLoseWindow(view, canvas, that, game);
                 view.renderLoseWindow();
                 this.endGame();
             }
@@ -91,7 +91,7 @@ GameController.prototype = {
         var canvas = view.createCanvas();
         view.bindWidget();
         $('#start').on('click', function() {
-            view.startGame(view, canvas);
+            view.startGame(view, canvas, game);
             view.toggleHeader('hidden');
             view.toggleBanner('hidden');
             view.toggleBackground('none');
@@ -107,7 +107,7 @@ function GameView() {
 }
 
 GameView.prototype = {
-    startGame: function(view) {
+    startGame: function(view, canvas, game) {
         var board = new Board();
         var keysDown = {};
         var hero = new Ralph(0, 650, 2);
@@ -121,7 +121,7 @@ GameView.prototype = {
         interval = setInterval(function() {
             board.updateHero(keysDown, hero);
             board.updateFelix(badGuys);
-            board.checkForHit(view, badGuys, hero);
+            board.checkForHit(view, badGuys, hero, game);
             view.render(hero, badGuys, canvas);
             board.winner(hero);
         }, 10);
@@ -131,7 +131,11 @@ GameView.prototype = {
         $('.container').css("visibility", visibility);
     },
 
-    initLoseWindow: function(view) {
+    initLoseWindow: function(view, canvas, board, game) {
+        console.log(view)
+        console.log(canvas)
+        console.log(board)
+        console.log(game)
         $("#dialog-lose").dialog({
             modal: true,
             resizable: true,
@@ -139,13 +143,12 @@ GameView.prototype = {
             buttons: {
                 "Play Again?": function() {
                     $(this).dialog("close");
-                    view.startGame(view, board);
-                    hero = new Ralph(0, 650, 2);
+                    view.startGame(view, canvas, game);
                 },
                 "Quit": function() {
                     view.resetHomePage();
                     $(this).dialog("close");
-                    game.run();
+                    game.run(view, game);
                 }
             }
         });
