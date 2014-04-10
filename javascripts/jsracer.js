@@ -69,9 +69,9 @@ Board.prototype = {
             delete keysDown[e.keyCode];
         });
     },
-    winner: function(hero) {
+    winner: function(hero, view, canvas, board, game) {
         if (hero.y <= 0) {
-            view.initWinWindow();
+            view.initWinWindow(view, canvas, board, game);
             view.renderWinWindow();
             this.endGame();
         }
@@ -123,7 +123,7 @@ GameView.prototype = {
             board.updateFelix(badGuys);
             board.checkForHit(view, badGuys, hero, game);
             view.render(hero, badGuys, canvas);
-            board.winner(hero);
+            board.winner(hero, view, canvas, board, game);
         }, 10);
     },
 
@@ -148,13 +148,12 @@ GameView.prototype = {
                 "Quit": function() {
                     view.resetHomePage();
                     $(this).dialog("close");
-                    game.run(view, game);
                 }
             }
         });
     },
 
-    initWinWindow: function() {
+    initWinWindow: function(view, canvas, board, game) {
         $("#dialog-win").dialog({
             modal: true,
             resizable: true,
@@ -162,13 +161,11 @@ GameView.prototype = {
             buttons: {
                 "Play Again?": function() {
                     $(this).dialog("close");
-                    view.startGame(view, board);
-                    hero = new Ralph(0, 650, 2);
+                    view.startGame(view, canvas, game);
                 },
                 "Quit": function() {
-                    view.resetHomePage();
                     $(this).dialog("close");
-                    game.run();
+                    view.resetHomePage();
                 }
             }
         });
@@ -248,9 +245,8 @@ GameView.prototype = {
         canvas.id = 'canvas';
         canvas.width = 747;
         canvas.height = 700;
+        $('container').empty();
         $('.container').append(canvas);
         return canvas;
     }
-
-
 }
