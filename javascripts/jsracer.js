@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    game = new GameController;
-    view = new GameView;
-    game.run(view)
+    var game = new GameController;
+    var view = new GameView;
+    game.run(view, game);
 
 })
 
@@ -21,7 +21,7 @@ function Ralph(x, y, speed) {
 
 function Board() {}
 Board.prototype = {
-    updateHero: function() {
+    updateHero: function(keysDown, hero) {
         if (37 in keysDown) {
             hero.x -= hero.speed;
         }
@@ -36,7 +36,7 @@ Board.prototype = {
         }
     },
 
-    updateFelix: function() {
+    updateFelix: function(badGuys) {
         var i;
         for (i = 0; i < badGuys.length; i++) {
             if (badGuys[i].x >= 750) {
@@ -47,9 +47,9 @@ Board.prototype = {
         }
     },
 
-    checkForHit: function() {
+    checkForHit: function(view, badGuys, hero) {
         var i;
-        var view = new GameView();
+        // var view = new GameView();
         for (i = 0; i < badGuys.length; i++) {
             var aodX = [badGuys[i].x - 14, badGuys[i].x + 14];
             var aodY = [badGuys[i].y - 82, badGuys[i].y + 82];
@@ -61,7 +61,7 @@ Board.prototype = {
         }
     },
 
-    keyboardListener: function() {
+    keyboardListener: function(keysDown) {
         window.addEventListener('keydown', function(e) {
             keysDown[e.keyCode] = true;
         });
@@ -69,7 +69,7 @@ Board.prototype = {
             delete keysDown[e.keyCode];
         });
     },
-    winner: function() {
+    winner: function(hero) {
         if (hero.y <= 0) {
             view.initWinWindow();
             view.renderWinWindow();
@@ -87,53 +87,51 @@ Board.prototype = {
 function GameController() {}
 
 GameController.prototype = {
-    run: function(view) {
-        board = new Board();
-        keysDown = {};
-        hero = new Ralph(0, 650, 2);
-        felix1 = new Felix(20, 90, 2);
-        felix2 = new Felix(120, 320, 6);
-        felix3 = new Felix(320, 520, 3);
-        badGuys = [felix1, felix2, felix3];
-        view.createCanvas();
+    run: function(view, game) {
+        var canvas = view.createCanvas();
         view.bindWidget();
         $('#start').on('click', function() {
-            view.startGame(view, board);
+            view.startGame(view, canvas);
             view.toggleHeader('hidden');
             view.toggleBanner('hidden');
             view.toggleBackground('none');
             view.toggleBackground('url(Images/gamebg.png)')
         })
     },
-
-    runUpdate: function() {
-        board.updateHero();
-        board.updateFelix();
-        board.checkForHit();
-        view.render();
-        board.winner();
-    },
 }
-
 
 // VIEW
 
-function GameView() {}
+function GameView() {
 
+}
 
 GameView.prototype = {
-    startGame: function(view, board) {
+    startGame: function(view) {
+        var board = new Board();
+        var keysDown = {};
+        var hero = new Ralph(0, 650, 2);
+        var felix1 = new Felix(20, 90, 2);
+        var felix2 = new Felix(120, 320, 6);
+        var felix3 = new Felix(320, 520, 3);
+        var badGuys = [felix1, felix2, felix3];
         this.toggleContainer("visible")
         this.toggleStartButton("hidden");
-        board.keyboardListener();
-        interval = setInterval(game.runUpdate, 10);
+        board.keyboardListener(keysDown);
+        interval = setInterval(function() {
+            board.updateHero(keysDown, hero);
+            board.updateFelix(badGuys);
+            board.checkForHit(view, badGuys, hero);
+            view.render(hero, badGuys, canvas);
+            board.winner(hero);
+        }, 10);
     },
 
     toggleContainer: function(visibility) {
         $('.container').css("visibility", visibility);
     },
 
-    initLoseWindow: function() {
+    initLoseWindow: function(view) {
         $("#dialog-lose").dialog({
             modal: true,
             resizable: true,
@@ -202,10 +200,11 @@ GameView.prototype = {
         this.toggleBackground('url(Images/startbg.png)');
     },
 
-    render: function() {
-        ctx = canvas.getContext("2d");
-        heroImg = new Image();
-        felixImg = new Image();
+    render: function(hero, badGuys, canvas) {
+        var that = this
+        var heroImg = new Image();
+        var felixImg = new Image();
+        var ctx = canvas.getContext("2d");
         heroImg.src = 'Images/ralph.png';
         felixImg.src = 'Images/felix.png';
         heroImg.addEventListener("load", function() {
@@ -242,12 +241,12 @@ GameView.prototype = {
     },
 
     createCanvas: function() {
-        canvas = document.createElement("canvas");
+        var canvas = document.createElement("canvas");
         canvas.id = 'canvas';
-        ctx = canvas.getContext("2d");
         canvas.width = 747;
         canvas.height = 700;
         $('.container').append(canvas);
+        return canvas;
     }
 
 
