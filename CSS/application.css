@@ -1,10 +1,8 @@
 .container {
   position: absolute;
-
   visibility: hidden;
-  border: 1px solid black;
-  height: 700px;
-  width: 747px;
+  height: 80%;
+  width: 80%;
   margin-top: -450px;
   margin-left: 250px;
 
@@ -19,6 +17,7 @@
 }
 
 header {
+  width:100%;
   margin-top: 20px;
   z-index: 1;
   color:black;
@@ -32,8 +31,7 @@ header {
 
 
 header span {
-  margin-left: 330px;
-
+  margin-left: 35%;
   text-shadow:
     -2px -2px 0 white,
     1px -1px 0 white,
@@ -43,25 +41,33 @@ header span {
 }
 
 body {
-  background: url('../Images/startbg.png');
-  background-repeat:no-repeat;
+  background: url('../Images/startbg.png') no-repeat fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
+html, body {
+    height: 100%;
+}
+
+
 #canvas {
+  position:absolute;
   background-image: url('../Images/background.png');
+  margin-left: 4%;
+  margin-top: -15%;
 
 }
 
 #start-button button  {
-  margin-top: 50px;
-  margin-left: 430px;
-  background-color: none;
-  height: 150px;
-  width: 400px;
-  border-radius: 5px;
+  margin-top: 25%;
+  margin-left: 43%;
+  background-color: transparent;
+  border: none;
   font-family: 'Trade Winds', cursive;
   font-size: 40px;
-  background-color: transparent;
   color: black;
   text-shadow:
     -2px -2px 0 white,
@@ -69,6 +75,10 @@ body {
     -1px 1px 0 white,
     1px 1px 0 white;
 
+}
+
+#start-button button:hover {
+  color:#A00000;
 }
 
 #dialog {
@@ -80,18 +90,12 @@ body {
   color: red;
 }
 
-
-
-/*body > div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-draggable.ui-dialog-buttons
-{*/
-
-  #dialog-lose {
+#dialog-lose {
   background-image: url('../Images/lose.png');
 }
 
 
 #dialog-win {
   background-image: url('../Images/win.png');
-
 }
 
