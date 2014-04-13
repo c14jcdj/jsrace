@@ -90,7 +90,7 @@ GameController.prototype = {
     run: function(view, game) {
         var canvas = view.createCanvas();
         view.bindWidget();
-        $('#start').on('click', function() {
+        $('#start-button').on('click', function() {
             view.startGame(view, canvas, game);
             view.toggleHeader('hidden');
             view.toggleBanner('hidden');
@@ -227,7 +227,7 @@ GameView.prototype = {
             $("#dialog-lose").dialog({
                 autoOpen: false
             });
-            $("#start").on("click", function() {
+            $("#start-button").on("click", function() {
                 $("#dialog-start").dialog({
                     modal: true
                 });
@@ -237,7 +237,7 @@ GameView.prototype = {
     },
 
     toggleStartButton: function(visibility) {
-        $('#start').css('visibility', visibility)
+        $('#start-button').css('visibility', visibility)
     },
 
     createCanvas: function() {
