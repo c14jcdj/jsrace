@@ -3,10 +3,10 @@
 .container {
   visibility: hidden;
   position: fixed;
-  height: 100%;
+  height: 90%;
   width: 73%;
   left: 13%;
-  top: 0;
+  top: 5%;
 
 }
 
@@ -81,78 +81,79 @@ html, body {
     height: 100%;
 }
 
-
-
-
-
-#dialog {
-  height: 800px;
-  width: 800px;
-}
-
-#ui-id-1 {
-  color: red;
-}
-
-#dialog-lose {
-  background-image: url('../Images/lose.png');
 }
 
 
-#dialog-win {
-  background-image: url('../Images/win.png');
-}
+/*/////////////     MEDIA QUERIES 1280 - 1025      //////////////////*/
 
-
-}
-
-
-
-
-
-
-@media all and (max-width: 1600px) and (min-width: 1025px) {
-
+@media all and (max-width: 1280px) and (min-width: 1025px) {
 .container {
-  /*position: absolute;
   visibility: hidden;
-  /*height: 80%;
-  width: 80%;
-  margin-top: -450px;
-  margin-left: 250px;*/
+  position: fixed;
+  height: 96%;
+  width: 66.5%;
+  left: 16%;
+  top: 2%;
 
 }
 
-#banner {
-  margin-top: 150px;
+#canvas {
+  height: 100%;
   width: 100%;
-  height: 150px;
+  background-image: url('../Images/backgroundmiddle.png');
+
+}
+#banner {
+  top: 20%;
+  position: relative;
+  width: 100%;
+  height: 250px;
   opacity: .3;
   background-color: red;
 }
 
-/*header {
-  width:100%;
-  margin-top: 20px;
-  z-index: 1;
-  color:black;
+#header {
+  position: absolute;
+  font-size: 7em;
+  top: 25%;
+  left: 19%;
+  font-weight: bold;
+  font-style: italic;
   font-family: 'Trade Winds', cursive;
-  /*position: absolute;*/
-  /*padding: 4px;*/
-  /*font-size: 80px;*/
-
-/*}*/
-
-
-
-/*header span {
-  margin: 0 auto;
-  text-shadow:
+  z-index: 1;
+    text-shadow:
     -2px -2px 0 white,
     1px -1px 0 white,
     -1px 1px 0 white,
     1px 1px 0 white;
 
+}
+
+#start-button {
+  position: relative;
+  top: 25%;
+}
+
+#start-button button {
+  font-size: 4em;
+  font-family: 'Trade Winds', cursive;
+  background: none;
+  border: none;
+  margin-left: 34%;
+  text-shadow:
+    -2px -2px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
+}
+
+#start-button button:hover {
+  color:#A00000;
+   text-shadow:
+    -2px -2px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
 }
 
 body {
@@ -167,36 +168,9 @@ html, body {
     height: 100%;
 }
 
-
-#canvas {
-  position:absolute;
-  background-image: url('../Images/background.png');
-  margin: 0 auto;
-}
-
-#start-button button  {
-  margin-top: 25%;
-  margin-left: 43%;
-  background-color: transparent;
-  border: none;
-  font-family: 'Trade Winds', cursive;
-  font-size: 40px;
-  color: black;
-  text-shadow:
-    -2px -2px 0 white,
-    1px -1px 0 white,
-    -1px 1px 0 white,
-    1px 1px 0 white;
-
-}
-
-#start-button button:hover {
-  color:#A00000;
-}
-
 #dialog {
-  height: 800px;
-  width: 800px;
+  height: 60%;
+  width: 60%;
 }
 
 #ui-id-1 {
@@ -211,6 +185,314 @@ html, body {
 #dialog-win {
   background-image: url('../Images/win.png');
 }
+}
+
+/*/////////////     MEDIA QUERIES 1366 - 1281      //////////////////*/
+
+@media all and (max-width: 1366px) and (min-width: 1281px) {
+.container {
+  visibility: hidden;
+  position: fixed;
+  height: 96%;
+  width: 62%;
+  left: 18%;
+  top: 2%;
 
 }
-*/
+
+#canvas {
+  height: 100%;
+  width: 100%;
+  background-image: url('../Images/backgroundmiddle.png');
+
+}
+#banner {
+  top: 20%;
+  position: relative;
+  width: 100%;
+  height: 250px;
+  opacity: .3;
+  background-color: red;
+}
+
+#header {
+  position: absolute;
+  font-size: 7em;
+  top: 25%;
+  left: 21%;
+  font-weight: bold;
+  font-style: italic;
+  font-family: 'Trade Winds', cursive;
+  z-index: 1;
+    text-shadow:
+    -2px -2px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
+
+}
+
+#start-button {
+  position: relative;
+  top: 25%;
+}
+
+#start-button button {
+  font-size: 4em;
+  font-family: 'Trade Winds', cursive;
+  background: none;
+  border: none;
+  margin-left: 34%;
+  text-shadow:
+    -2px -2px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
+}
+
+#start-button button:hover {
+  color:#A00000;
+   text-shadow:
+    -2px -2px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
+}
+
+body {
+  background: url('../Images/startbg.png') no-repeat fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+html, body {
+    height: 100%;
+}
+
+#dialog {
+  height: 60%;
+  width: 60%;
+}
+
+#ui-id-1 {
+  color: red;
+}
+
+#dialog-lose {
+  background-image: url('../Images/lose.png');
+}
+
+
+#dialog-win {
+  background-image: url('../Images/win.png');
+}
+}
+
+
+/*/////////////     MEDIA QUERIES 1440 - 1281      //////////////////*/
+
+@media all and (max-width: 1440px) and (min-width: 1367px) {
+.container {
+  visibility: hidden;
+  position: fixed;
+  height: 88%;
+  width: 59%;
+  left: 20%;
+  top: 6%;
+
+}
+
+#canvas {
+  height: 100%;
+  width: 100%;
+  background-image: url('../Images/backgroundmiddle.png');
+
+}
+#banner {
+  top: 20%;
+  position: relative;
+  width: 100%;
+  height: 250px;
+  opacity: .3;
+  background-color: red;
+}
+
+#header {
+  position: absolute;
+  font-size: 7em;
+  top: 25%;
+  left: 25%;
+  font-weight: bold;
+  font-style: italic;
+  font-family: 'Trade Winds', cursive;
+  z-index: 1;
+    text-shadow:
+    -2px -2px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
+
+}
+
+#start-button {
+  position: relative;
+  top: 25%;
+}
+
+#start-button button {
+  font-size: 4em;
+  font-family: 'Trade Winds', cursive;
+  background: none;
+  border: none;
+  margin-left: 38%;
+  text-shadow:
+    -2px -2px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
+}
+
+#start-button button:hover {
+  color:#A00000;
+   text-shadow:
+    -2px -2px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
+}
+
+body {
+  background: url('../Images/startbg.png') no-repeat fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+html, body {
+    height: 100%;
+}
+
+#dialog {
+  height: 60%;
+  width: 60%;
+}
+
+#ui-id-1 {
+  color: red;
+}
+
+#dialog-lose {
+  background-image: url('../Images/lose.png');
+}
+
+
+#dialog-win {
+  background-image: url('../Images/win.png');
+}
+}
+
+/*/////////////     MEDIA QUERIES 1600 - 1441      //////////////////*/
+
+@media all and (max-width: 1600px) and (min-width: 1441px) {
+.container {
+  visibility: hidden;
+  position: fixed;
+  height: 88%;
+  width: 53%;
+  left: 23%;
+  top: 6%;
+
+}
+
+#canvas {
+  height: 100%;
+  width: 100%;
+  background-image: url('../Images/backgroundmiddle.png');
+
+}
+#banner {
+  top: 20%;
+  position: relative;
+  width: 100%;
+  height: 250px;
+  opacity: .3;
+  background-color: red;
+}
+
+#header {
+  position: absolute;
+  font-size: 7em;
+  top: 25%;
+  left: 25%;
+  font-weight: bold;
+  font-style: italic;
+  font-family: 'Trade Winds', cursive;
+  z-index: 1;
+    text-shadow:
+    -2px -2px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
+
+}
+
+#start-button {
+  position: relative;
+  top: 25%;
+}
+
+#start-button button {
+  font-size: 4em;
+  font-family: 'Trade Winds', cursive;
+  background: none;
+  border: none;
+  margin-left: 38%;
+  text-shadow:
+    -2px -2px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
+}
+
+#start-button button:hover {
+  color:#A00000;
+   text-shadow:
+    -2px -2px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
+}
+
+body {
+  background: url('../Images/startbg.png') no-repeat fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+html, body {
+    height: 100%;
+}
+
+#dialog {
+  height: 60%;
+  width: 60%;
+}
+
+#ui-id-1 {
+  color: red;
+}
+
+#dialog-lose {
+  background-image: url('../Images/lose.png');
+}
+
+
+#dialog-win {
+  background-image: url('../Images/win.png');
+}
+}
